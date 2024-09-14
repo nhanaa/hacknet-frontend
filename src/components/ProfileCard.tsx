@@ -90,7 +90,7 @@ export default function ProfileCard({
                 backgroundColor="red.300"
                 textAlign="center"
               >
-                {user.role1}
+                {user.role1.toUpperCase()}
               </Text>
               <Text
                 className="p-1 rounded-sm"
@@ -100,7 +100,7 @@ export default function ProfileCard({
                 backgroundColor="orange.200"
                 textAlign="center"
               >
-                {user.role2}
+                {user.role2.toUpperCase()}
               </Text>
             </Box>
             <Text

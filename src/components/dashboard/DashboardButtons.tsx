@@ -33,13 +33,15 @@ export default function DashboardButtons() {
         </Button>
         <div className="relative">
           <Circle
+            className="hover:animate-bounce hover:cursor-pointer"
             size="2rem"
             bg="red"
             color="white"
             position="absolute"
             top={-2}
             right={-2}
-            zIndex={10}
+            zIndex={5}
+            shadow="medium"
           >
             <p>1</p>
           </Circle>
