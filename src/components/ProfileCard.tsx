@@ -5,11 +5,13 @@ import Image from 'next/image';
 interface ProfileCardProps {
   user: User | undefined;
   color?: string;
+  role?: string;
 }
 
 export default function ProfileCard({
   user,
   color,
+  role,
 }: ProfileCardProps) {
   if (!user) {
     return (
@@ -30,7 +32,7 @@ export default function ProfileCard({
                 color="teal"
                 textAlign="center"
               >
-                No more teammates to swipe!
+                {`No more ${role} teammates to swipe!`}
               </Text>
             </Stack>
           </CardBody>

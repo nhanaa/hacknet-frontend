@@ -206,7 +206,7 @@ export default function Swiper() {
             >
               No
             </Button>
-            <ProfileCard user={nextUser} color={cardColor} />
+            <ProfileCard user={nextUser} color={cardColor} role={currentQueue.toLowerCase()}/>
             <Button
               className="w-20"
               colorScheme="green"
