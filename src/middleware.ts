@@ -11,6 +11,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(`${origin}/auth/login`);
   }
 
+  if (url.pathname.startsWith("/auth") && accessToken) {
+    return NextResponse.redirect(`${origin}/dashboard`);
+  }
+
   return NextResponse.next();
 }
 

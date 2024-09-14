@@ -18,7 +18,12 @@ export const useGetCurrentUser = () =>
           },
         }
       );
-      return response.json();
+
+      if (response.status === 404) {
+        throw new Error('User has not completed onboarding');
+      }
+
+      return response.json() as Promise<User>;
     },
   });
 

@@ -1,21 +1,37 @@
 'use client';
 
+import React, { useEffect } from 'react';
 import { Spinner, Stack, Text } from '@chakra-ui/react';
-import React from 'react';
+import { useRouter } from 'next/navigation';
 import ProfileCard from '../ProfileCard';
-import { useGetCurrentUser } from '@/hooks/user.hooks';
 import DashboardButtons from './DashboardButtons';
+import { useGetCurrentUser } from '@/hooks/user.hooks';
 
 export default function WelcomeUser() {
-  const { data: user } = useGetCurrentUser();
+  const router = useRouter();
+  const { data: user, isError, isLoading, error } = useGetCurrentUser();
+
+  useEffect(() => {
+    if (isError && error?.message === 'User has not completed onboarding') {
+      router.push('/onboarding/upload-resume');
+    }
+  }, [isError, error, router]);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Spinner size="xl" color="teal" />
+      </div>
+    );
+  }
 
   if (!user) {
-    return <Spinner size="xl" color="teal" />;
+    return null; // or return a fallback UI
   }
 
   return (
-    <div className="flex flex-row">
-      <div className="animate-fade">
+    <div className="flex flex-row animate-fade">
+      <div className="flex-1">
         <Stack
           className="flex flex-col justify-center items-center"
           gap={5}
@@ -31,7 +47,7 @@ export default function WelcomeUser() {
           <ProfileCard user={user} />
         </Stack>
       </div>
-      <div>
+      <div className="flex-1">
         <DashboardButtons />
       </div>
     </div>

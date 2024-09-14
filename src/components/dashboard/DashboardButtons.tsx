@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function DashboardButtons() {
   const router = useRouter();
   const [leave, setLeave] = useState(false);
-  const team_swiper_click = () => {
+  const teamSwiperClick = () => {
     // setLeave(true);
     setTimeout(() => {
       router.push("/swiper");
@@ -21,7 +21,7 @@ export default function DashboardButtons() {
       } h-full w-full flex justify-center items-center pr-32 animate-fade`}
     >
       <Stack className="flex flex-col justify-center items-center" gap={10}>
-        <Button className="w-64" colorScheme="teal" onClick={team_swiper_click}>
+        <Button className="w-64" colorScheme="teal" onClick={teamSwiperClick}>
           Teammate Swiper
         </Button>
         <Button className="w-64" colorScheme="teal">
