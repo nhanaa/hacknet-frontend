@@ -20,7 +20,7 @@ export default function Landing() {
       } else {
         router.push("/auth/login");
       }
-    }, 800);
+    }, 600);
   };
 
   return (

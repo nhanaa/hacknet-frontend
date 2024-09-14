@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { ArrowRightIcon } from '@chakra-ui/icons';
-import { Button, Spinner, Text } from '@chakra-ui/react';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import ProfileCard from '../ProfileCard';
-import { useGetCurrentUser } from '@/hooks/user.hooks';
+import { ArrowRightIcon } from "@chakra-ui/icons";
+import { Button, Spinner, Text } from "@chakra-ui/react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import ProfileCard from "../ProfileCard";
+import { useGetCurrentUser } from "@/hooks/user.hooks";
 
 export default function Profile() {
   const router = useRouter();
@@ -16,8 +16,8 @@ export default function Profile() {
   const handleGoToDashboard = () => {
     setLeave(true);
     setTimeout(() => {
-      router.push('/dashboard');
-    }, 500);
+      router.push("/dashboard");
+    }, 700);
   };
 
   if (!user) {
@@ -27,16 +27,11 @@ export default function Profile() {
   return (
     <div
       className={`${
-        leave && 'animate-fadeOut'
+        leave && "animate-fadeOut"
       } h-full w-full flex flex-col justify-center items-center gap-5 animate-fade`}
     >
-      <Text
-        fontSize="5xl"
-        fontWeight="bold"
-        color="teal"
-        textAlign="center"
-      >
-        {'Tada! This is your HackNet card'}
+      <Text fontSize="5xl" fontWeight="bold" color="teal" textAlign="center">
+        {"Tada! This is your HackNet card"}
       </Text>
       <ProfileCard user={user} />
       <Button

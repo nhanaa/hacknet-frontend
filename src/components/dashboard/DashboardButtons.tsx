@@ -1,29 +1,30 @@
-'use client';
+"use client";
 
-import { Button, Stack } from '@chakra-ui/react';
-import { deleteCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation';
+import { Button, Stack } from "@chakra-ui/react";
+import { deleteCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function DashboardButtons() {
   const router = useRouter();
-
+  const [leave, setLeave] = useState(false);
+  const team_swiper_click = () => {
+    // setLeave(true);
+    setTimeout(() => {
+      router.push("/swiper");
+    }, 700);
+  };
   return (
-    <div className="h-full w-full flex justify-center items-center pr-32 animate-fade">
-      <Stack
-        className="flex flex-col justify-center items-center"
-        gap={10}
-      >
-        <Button
-          className="w-64"
-          colorScheme="teal"
-          onClick={() => router.push('/swiper')}
-        >
+    <div
+      className={`${
+        leave && "animate-fadeOut"
+      } h-full w-full flex justify-center items-center pr-32 animate-fade`}
+    >
+      <Stack className="flex flex-col justify-center items-center" gap={10}>
+        <Button className="w-64" colorScheme="teal" onClick={team_swiper_click}>
           Teammate Swiper
         </Button>
-        <Button
-          className="w-64"
-          colorScheme="teal"
-        >
+        <Button className="w-64" colorScheme="teal">
           Roster Evaluator
         </Button>
         <Button
@@ -31,8 +32,8 @@ export default function DashboardButtons() {
           colorScheme="teal"
           variant="outline"
           onClick={() => {
-            deleteCookie('accessToken');
-            router.push('/auth/login');
+            deleteCookie("accessToken");
+            router.push("/auth/login");
           }}
         >
           Logout
