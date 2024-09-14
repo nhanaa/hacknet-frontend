@@ -19,7 +19,10 @@ import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import ProfileCard from '../ProfileCard';
 import { ArrowLeftIcon, ChatIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/navigation';
-import { useGetPossibleMatches } from '@/hooks/matches.hooks';
+import {
+  useCreateMatch,
+  useGetPossibleMatches,
+} from '@/hooks/matches.hooks';
 
 export default function Swiper() {
   const router = useRouter();
@@ -45,6 +48,8 @@ export default function Swiper() {
     isLoading,
     isError,
   } = useGetPossibleMatches();
+
+  const { mutate: matchUser } = useCreateMatch();
 
   const getNextUser = () => {
     {
@@ -107,51 +112,80 @@ export default function Swiper() {
   }, [isLoading, isError]);
 
   const handleYes = () => {
-    // TODO: Match and fetch users from the backend
-
-
-    // TODO: check if the user has confirmed the match and show the modal
-    setHasConfirmedMatch(true);
-
-    switch (currentQueue) {
-      case 'Frontend':
-        setFrontendQueue(frontendQueue.slice(0, -1));
-        break;
-      case 'Backend':
-        setBackendQueue(backendQueue.slice(0, -1));
-        break;
-      case 'Data Science':
-        setDatascienceQueue(datascienceQueue.slice(0, -1));
-        break;
-      case 'Business':
-        setBusinessQueue(businessQueue.slice(0, -1));
-        break;
-      default:
-        break;
+    if (!nextUser) {
+      return;
     }
+
+    matchUser(
+      {
+        user2Id: nextUser?.userId,
+        matchType: true,
+      },
+      {
+        onSuccess: (data) => {
+          switch (currentQueue) {
+            case 'Frontend':
+              setFrontendQueue(frontendQueue.slice(0, -1));
+              break;
+            case 'Backend':
+              setBackendQueue(backendQueue.slice(0, -1));
+              break;
+            case 'Data Science':
+              setDatascienceQueue(datascienceQueue.slice(0, -1));
+              break;
+            case 'Business':
+              setBusinessQueue(businessQueue.slice(0, -1));
+              break;
+            default:
+              break;
+          }
+
+          if (data.confirmed) {
+            setHasConfirmedMatch(true);
+          }
+        },
+        onError: (error) => {
+          console.error(error);
+        },
+      }
+    );
   };
 
   const handleNo = () => {
-    // TODO: Match and fetch users from the backend
-    switch (currentQueue) {
-      case 'Frontend':
-        setFrontendQueue(frontendQueue.slice(0, -1));
-        break;
-      case 'Backend':
-        setBackendQueue(backendQueue.slice(0, -1));
-        break;
-      case 'Data Science':
-        setDatascienceQueue(datascienceQueue.slice(0, -1));
-        break;
-      case 'Business':
-        setBusinessQueue(businessQueue.slice(0, -1));
-        break;
-      default:
-        break;
+    if (!nextUser) {
+      return;
     }
+
+    matchUser({
+      user2Id: nextUser?.userId,
+      matchType: false,
+    }, {
+      onSuccess: () => {
+        switch (currentQueue) {
+          case 'Frontend':
+            setFrontendQueue(frontendQueue.slice(0, -1));
+            break;
+          case 'Backend':
+            setBackendQueue(backendQueue.slice(0, -1));
+            break;
+          case 'Data Science':
+            setDatascienceQueue(datascienceQueue.slice(0, -1));
+            break;
+          case 'Business':
+            setBusinessQueue(businessQueue.slice(0, -1));
+            break;
+          default:
+            break;
+        }
+      },
+      onError: (error) => {
+        console.error(error);
+      },
+    })
   };
 
   const handleSendMessage = () => {
+    // TODO: Send message to the other user
     console.log(message);
     setHasConfirmedMatch(false);
     setMessage('');
@@ -215,6 +249,7 @@ export default function Swiper() {
               className="w-20"
               colorScheme="red"
               variant="solid"
+              isDisabled={!nextUser}
               onClick={handleNo}
             >
               No
@@ -228,6 +263,7 @@ export default function Swiper() {
               className="w-20"
               colorScheme="green"
               variant="solid"
+              isDisabled={!nextUser}
               onClick={handleYes}
             >
               Yes
