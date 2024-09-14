@@ -50,7 +50,7 @@ export default function UploadResume() {
   }, [file, isUploading, toast, router]);
 
   return (
-    <div className="h-full w-1/2 flex flex-col justify-center items-center gap-5">
+    <div className="h-full w-1/2 flex flex-col justify-center items-center gap-5 animate-fade">
       {!isUploading && (
         <div className="h-full w-full flex flex-col justify-center items-center gap-5">
           <Text
@@ -85,6 +85,7 @@ export default function UploadResume() {
         <div className="flex flex-col justify-center items-center gap-5">
           <Spinner speed="1s" size="xl" thickness="4px" color="teal" />
           <Text
+            className="animate-fadeLoop"
             fontSize="5xl"
             fontWeight="bold"
             color="teal"
