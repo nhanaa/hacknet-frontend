@@ -15,9 +15,9 @@ export default function Landing() {
     setLeave(true);
     setTimeout(() => {
       if (getCookie("accessToken")) {
-        router.push("/auth/signup");
+        router.push("/dashboard");
       } else {
-        router.push("/auth/login");
+        router.push("/auth/signup");
       }
     }, 600);
   };

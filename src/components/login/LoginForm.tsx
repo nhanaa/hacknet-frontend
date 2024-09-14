@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useLogin } from '@/hooks/auth.hooks';
 import {
@@ -16,8 +16,8 @@ export default function LoginForm() {
   const router = useRouter();
   const toast = useToast();
 
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const { mutate: login, isPending } = useLogin({
     onSuccess: (data) => {
@@ -29,12 +29,12 @@ export default function LoginForm() {
         router.push('/dashboard');
       }
     },
-    onError: () => {
+    onError: (error: Error) => {
       toast({
-        title: "Error",
-        position: "top",
-        description: "Invalid email or password",
-        status: "error",
+        title: 'Error',
+        position: 'top',
+        description: error.message,
+        status: 'error',
         duration: 3000,
         isClosable: true,
       });
@@ -46,31 +46,43 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="h-full w-1/5 flex flex-col justify-center items-center gap-5 animate-fade">
-      <Text fontSize="5xl" fontWeight="bold" color="teal" textAlign="center">
-        Login
-      </Text>
-      <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-      <Input
-        placeholder="Password"
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <Link
-        className="w-full text-right !underline"
-        fontSize="smaller"
-        href="/auth/signup"
-      >
-        {"Don\'t have an account? Signup here"}
-      </Link>
-      <Button
-        className="w-28"
-        colorScheme="teal"
-        isDisabled={isPending}
-        onClick={handleLogin}
-      >
-        Login
-      </Button>
-    </div>
+    <form className="w-1/5" onSubmit={handleLogin}>
+      <div className="h-full w-full flex flex-col justify-center items-center gap-5 animate-fade">
+        <Text
+          fontSize="5xl"
+          fontWeight="bold"
+          color="teal"
+          textAlign="center"
+        >
+          Login
+        </Text>
+        <Input
+          placeholder="Email"
+          isRequired
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          placeholder="Password"
+          type="password"
+          isRequired
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Link
+          className="w-full text-right !underline mr-3"
+          fontSize="smaller"
+          href="/auth/signup"
+        >
+          {"Don't have an account? Signup here"}
+        </Link>
+        <Button
+          className="w-28"
+          type="submit"
+          colorScheme="teal"
+          isDisabled={isPending}
+        >
+          Login
+        </Button>
+      </div>
+    </form>
   );
 }

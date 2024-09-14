@@ -15,6 +15,11 @@ export const useLogin = (options: UseMutationOptions<LoginResponse, Error, UserA
         password: user.password,
       }),
     });
+
+    if (!response.ok) {
+      throw new Error('Invalid email or password');
+    }
+
     return response.json();
   },
   ...options,
@@ -30,6 +35,11 @@ export const useSignup = (options: UseMutationOptions<SignupResponse, Error, Use
       },
       body: JSON.stringify(user),
     });
+
+    if (!response.ok) {
+      throw new Error('Registration failed. Please try again');
+    }
+
     return response.json();
   },
   ...options,
