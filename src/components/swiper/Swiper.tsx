@@ -302,8 +302,8 @@ export default function Swiper() {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader> You've got a match!</ModalHeader>
-          <ModalBody>Let them know you're interested!</ModalBody>
+          <ModalHeader>{"You\'ve got a match!"}</ModalHeader>
+          <ModalBody>{"Let them know you\'re interested!"}</ModalBody>
           <ModalFooter>
             <Box className="w-full flex flex-row justify-between items-center gap-3">
               <Input

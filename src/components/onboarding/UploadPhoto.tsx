@@ -20,7 +20,7 @@ export default function UploadPhoto() {
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { mutate: uploadUserPhoto, isPending } = useUploadUserPhoto({
+  const { mutate: uploadUserPhoto } = useUploadUserPhoto({
     onSuccess: () => {
       setTimeout(() => {
         router.push('/onboarding/profile');

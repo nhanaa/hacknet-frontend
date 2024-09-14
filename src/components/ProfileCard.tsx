@@ -112,9 +112,10 @@ export default function ProfileCard({
               Languages & Frameworks
             </Text>
             <Box className="flex flex-row justify-center items-center gap-2">
-              {user.primaryLanguages.map((language) => (
+              {user.primaryLanguages.map((language, index) => (
                 <Text
                   className="w-20 p-1 rounded-sm whitespace-nowrap"
+                  key={index}
                   fontSize="small"
                   fontWeight="600"
                   color="white"
@@ -126,9 +127,10 @@ export default function ProfileCard({
               ))}
             </Box>
             <Box className="flex flex-row justify-center items-center gap-2">
-              {user.secondaryLanguages.map((language) => (
+              {user.secondaryLanguages.map((language, index) => (
                 <Text
                   className="w-20 p-1 rounded-sm whitespace-nowrap"
+                  key={index}
                   fontSize="small"
                   fontWeight="600"
                   color="white"

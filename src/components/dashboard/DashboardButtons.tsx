@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 export default function DashboardButtons() {
   const router = useRouter();
-  const [leave, setLeave] = useState(false);
+  const [leave] = useState(false);
   const teamSwiperClick = () => {
     // setLeave(true);
     setTimeout(() => {

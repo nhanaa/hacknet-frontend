@@ -61,7 +61,7 @@ export default function LoginForm() {
         fontSize="smaller"
         href="/auth/signup"
       >
-        Don't have an account? Signup here
+        {"Don\'t have an account? Signup here"}
       </Link>
       <Button
         className="w-28"
