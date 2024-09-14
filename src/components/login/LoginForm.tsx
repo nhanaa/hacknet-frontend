@@ -1,10 +1,16 @@
 "use client";
 
-import { useLogin } from "@/hooks/auth.hooks";
-import { Button, Input, Link, Text, useToast } from "@chakra-ui/react";
-import { setCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useLogin } from '@/hooks/auth.hooks';
+import {
+  Button,
+  Input,
+  Link,
+  Text,
+  useToast,
+} from '@chakra-ui/react';
+import { setCookie } from 'cookies-next';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -16,8 +22,12 @@ export default function LoginForm() {
   const { mutate: login, isPending } = useLogin({
     onSuccess: (data) => {
       // set in cookie
-      setCookie("accessToken", data.access_token);
-      router.push("/onboarding/upload-resume");
+      setCookie('accessToken', data.access_token);
+      if (data.needOnBoarding) {
+        router.push('/onboarding/upload-resume');
+      } else {
+        router.push('/dashboard');
+      }
     },
     onError: () => {
       toast({
@@ -46,6 +56,11 @@ export default function LoginForm() {
         type="password"
         onChange={(e) => setPassword(e.target.value)}
       />
+      <Link
+        className="w-full text-right !underline"
+        fontSize="smaller"
+        href="/auth/signup"
+      >
       <Link
         className="w-full text-right !underline"
         fontSize="smaller"

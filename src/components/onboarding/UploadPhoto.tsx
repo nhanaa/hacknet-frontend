@@ -1,9 +1,15 @@
-"use client";
+'use client';
 
-import { Button, Input, Spinner, Text, useToast } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
-import { TriangleUpIcon } from "@chakra-ui/icons";
-import { useRouter } from "next/navigation";
+import {
+  Button,
+  Input,
+  Spinner,
+  Text,
+  useToast,
+} from '@chakra-ui/react';
+import { useEffect, useRef, useState } from 'react';
+import { TriangleUpIcon } from '@chakra-ui/icons';
+import { useRouter } from 'next/navigation';
 import { useUploadUserPhoto } from '@/hooks/user.hooks';
 
 export default function UploadPhoto() {
@@ -16,7 +22,9 @@ export default function UploadPhoto() {
 
   const { mutate: uploadUserPhoto, isPending } = useUploadUserPhoto({
     onSuccess: () => {
-      router.push('/onboarding/profile');
+      setTimeout(() => {
+        router.push('/onboarding/profile');
+      }, 800);
     },
     onError: (error) => {
       console.error(error);
@@ -30,10 +38,10 @@ export default function UploadPhoto() {
       setIsUploading(true);
     } else {
       toast({
-        title: "Error",
-        position: "top",
-        description: "Something went wrong. Please try again.",
-        status: "error",
+        title: 'Error',
+        position: 'top',
+        description: 'Something went wrong. Please try again.',
+        status: 'error',
         duration: 3000,
         isClosable: true,
       });
@@ -61,14 +69,14 @@ export default function UploadPhoto() {
             {"Finally, let's put a face to your amazing profile"}
           </Text>
           <Text fontSize="xl" color="teal" textAlign="center">
-            {"Upload a photo of yourself to get started."}
+            {'Upload a photo of yourself to get started.'}
           </Text>
           <>
             <Input
               type="file"
               ref={fileInputRef}
               onChange={handleUpload}
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
               accept=".jpg,.jpeg,.png"
             />
             <Button
