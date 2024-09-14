@@ -21,7 +21,7 @@ export default function UploadResume() {
   const [loadingText, setLoadingText] = useState('Analyzing Resume');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { mutate: uploadUserResume, isPending } = useUploadUserResume(
+  const { mutate: uploadUserResume } = useUploadUserResume(
     {
       onSuccess: () => {
         setTimeout(() => {
