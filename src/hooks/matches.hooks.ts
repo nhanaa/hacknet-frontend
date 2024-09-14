@@ -5,7 +5,6 @@ import {
 } from '@/types/matches.types';
 import {
   useMutation,
-  UseMutationOptions,
   useQuery,
 } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
