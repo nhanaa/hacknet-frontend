@@ -13,7 +13,7 @@ const config = {
       },
       animation: {
         fade: "fadeIn 1s ease-in-out",
-        fadeOut: "fadeOut 1s ease-in-out",
+        fadeOut: "fadeOut 10s ease-in-out",
         fadeLoop: "fadeLoop 2s ease-in-out infinite",
       },
       keyframes: {
@@ -22,8 +22,9 @@ const config = {
           to: { opacity: 1, transform: "translate3d(0, 0, 0)" },
         },
         fadeOut: {
-          from: { opacity: 1, transform: "translate3d(0, 0, 0)" },
-          to: { opacity: 0, transform: "translate3d(0, -50%, 0)" },
+          "0%": { opacity: 1, transform: "translate3d(0, 0, 0)" },
+          "10%": { opacity: 0, transform: "translate3d(0, -50%, 0)" },
+          "100%": { opacity: 0, transform: "translate3d(0, -50%, 0)" },
         },
         fadeLoop: {
           "0%, 100%": { opacity: 1 },

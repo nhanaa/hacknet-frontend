@@ -1,20 +1,22 @@
 "use client";
 
-import { useUpdateUserGoal } from '@/hooks/user.hooks';
+import { useUpdateUserGoal } from "@/hooks/user.hooks";
 import { ArrowRightIcon } from "@chakra-ui/icons";
 import { Button, Select, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Goal() {
   const router = useRouter();
   const [leave, setLeave] = useState(false);
 
-  const [selectedGoal, setSelectedGoal] = useState<string>('');
+  const [selectedGoal, setSelectedGoal] = useState<string>("");
 
   const { mutate: updateUserGoal, isPending } = useUpdateUserGoal({
     onSuccess: () => {
-      router.push('/onboarding/upload-photo');
+      setTimeout(() => {
+        router.push("/onboarding/upload-photo");
+      }, 500);
     },
     onError: (error) => {
       console.error(error);
@@ -24,9 +26,6 @@ export default function Goal() {
   const handleNext = () => {
     updateUserGoal(selectedGoal);
     setLeave(true);
-    setTimeout(() => {
-      router.push("/onboarding/upload-photo");
-    }, 800);
   };
 
   return (

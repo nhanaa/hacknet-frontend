@@ -15,7 +15,7 @@ export default function Landing() {
     setLeave(true);
     setTimeout(() => {
       router.push("/auth/signup");
-    }, 800);
+    }, 600);
   };
 
   return (
