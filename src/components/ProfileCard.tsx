@@ -76,7 +76,7 @@ export default function ProfileCard({
               color="teal"
               textAlign="center"
             >
-              {user.experienceLevel}
+              {user.experienceLevel.toUpperCase()}
             </Text>
             <Box className="flex flex-row justify-center items-center gap-2">
               <Text fontSize="lg" color="teal" textAlign="center">
