@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -41,7 +41,8 @@ export default function LoginForm() {
     },
   });
 
-  const handleLogin = () => {
+  const handleLogin = (e: FormEvent<HTMLElement>) => {
+    e.preventDefault();
     login({ username: email, password });
   };
 

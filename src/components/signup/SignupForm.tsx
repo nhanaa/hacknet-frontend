@@ -9,7 +9,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 export default function SignupForm() {
   const router = useRouter();
@@ -42,7 +42,8 @@ export default function SignupForm() {
       router.push('/auth/login');
     }, 700);
   };
-  const handleLogin = () => {
+  const handleLogin = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     signup({ firstName, lastName, email, password });
   };
 
