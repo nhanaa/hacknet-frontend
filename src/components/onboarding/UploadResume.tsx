@@ -18,12 +18,24 @@ export default function UploadResume() {
 
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [loadingText, setLoadingText] = useState('Analyzing Resume');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { mutate: uploadUserResume, isPending } = useUploadUserResume(
     {
       onSuccess: () => {
-        router.push('/onboarding/goal');
+        setTimeout(() => {
+          setLoadingText('Extracting Information');
+        }, 1000);
+        setTimeout(() => {
+          setLoadingText('Analyzing Skills');
+        }, 3000);
+        setTimeout(() => {
+          setLoadingText('Creating Profile');
+        }, 5000);
+        setTimeout(() => {
+          router.push('/onboarding/goal');
+        }, 7000);
       },
       onError: (error) => {
         console.error(error);
@@ -96,7 +108,7 @@ export default function UploadResume() {
             color="teal"
             textAlign="center"
           >
-            Extracting information
+            {loadingText}
           </Text>
         </div>
       )}

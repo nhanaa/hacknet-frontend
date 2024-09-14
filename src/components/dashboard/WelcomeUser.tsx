@@ -15,7 +15,7 @@ export default function WelcomeUser() {
 
   return (
     <div className="flex flex-row">
-      <div>
+      <div className="animate-fade">
         <Stack
           className="flex flex-col justify-center items-center"
           gap={5}

@@ -42,10 +42,6 @@ export default function UploadPhoto() {
 
   useEffect(() => {
     if (file && isUploading) {
-      // TODO: Upload photo to server, if success move to next page
-      setTimeout(() => {
-        router.push("/onboarding/profile");
-      }, 2000);
       uploadUserPhoto({
         imageLink: '/photo1.png',
       });

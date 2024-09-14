@@ -4,8 +4,7 @@ import { useUpdateUserGoal } from '@/hooks/user.hooks';
 import { ArrowRightIcon } from "@chakra-ui/icons";
 import { Button, Select, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { ChangeEventHandler, useState } from 'react';
+import { useState } from 'react';
 
 export default function Goal() {
   const router = useRouter();

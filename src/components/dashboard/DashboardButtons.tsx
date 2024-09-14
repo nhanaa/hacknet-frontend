@@ -8,7 +8,7 @@ export default function DashboardButtons() {
   const router = useRouter();
 
   return (
-    <div className="h-full w-full flex justify-center items-center pr-32">
+    <div className="h-full w-full flex justify-center items-center pr-32 animate-fade">
       <Stack
         className="flex flex-col justify-center items-center"
         gap={10}
