@@ -1,0 +1,31 @@
+'use client';
+
+import { Button, Stack } from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
+
+export default function DashboardButtons() {
+  const router = useRouter();
+
+  return (
+    <div className="h-full w-full flex justify-center items-center pr-32">
+      <Stack
+        className="flex flex-col justify-center items-center"
+        gap={10}
+      >
+        <Button
+          className="w-64"
+          colorScheme="teal"
+          onClick={() => router.push('/swiper')}
+        >
+          Teammate Swiper
+        </Button>
+        <Button
+          className="w-64"
+          colorScheme="teal"
+        >
+          Roster Evaluator
+        </Button>
+      </Stack>
+    </div>
+  );
+}
