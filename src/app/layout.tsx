@@ -1,9 +1,4 @@
 import type { Metadata } from 'next';
-import { ChakraProvider } from '@chakra-ui/react';
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
 import './globals.css';
 import { Providers } from './providers';
 

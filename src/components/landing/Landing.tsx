@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import logo from "../../../public/logo.svg";
 import { useState } from "react";
-import Confetti from "../confetti/Confetti";
 import { getCookie } from "cookies-next";
 import ConfettiExplosion from "react-confetti-explosion";
 
@@ -17,9 +16,9 @@ export default function Landing() {
     setLeave(true);
     setTimeout(() => {
       if (getCookie("accessToken")) {
-        router.push("/auth/signup");
+        router.push("/dashboard");
       } else {
-        router.push("/auth/login");
+        router.push("/auth/signup");
       }
     }, 600);
   };
