@@ -1,15 +1,9 @@
-'use client';
+"use client";
 
-import {
-  Button,
-  Input,
-  Spinner,
-  Text,
-  useToast,
-} from '@chakra-ui/react';
-import { useEffect, useRef, useState } from 'react';
-import { TriangleUpIcon } from '@chakra-ui/icons';
-import { useRouter } from 'next/navigation';
+import { Button, Input, Spinner, Text, useToast } from "@chakra-ui/react";
+import { useEffect, useRef, useState } from "react";
+import { TriangleUpIcon } from "@chakra-ui/icons";
+import { useRouter } from "next/navigation";
 
 export default function UploadPhoto() {
   const toast = useToast();
@@ -26,10 +20,10 @@ export default function UploadPhoto() {
       setIsUploading(true);
     } else {
       toast({
-        title: 'Error',
-        position: 'top',
-        description: 'Something went wrong. Please try again.',
-        status: 'error',
+        title: "Error",
+        position: "top",
+        description: "Something went wrong. Please try again.",
+        status: "error",
         duration: 3000,
         isClosable: true,
       });
@@ -40,16 +34,21 @@ export default function UploadPhoto() {
     if (file && isUploading) {
       // TODO: Upload photo to server, if success move to next page
       setTimeout(() => {
-        router.push('/onboarding/profile');
-      }, 5000);
+        router.push("/onboarding/profile");
+      }, 2000);
     }
   }, [file, isUploading, toast, router]);
 
   return (
-    <div className="h-full w-1/2 flex flex-col justify-center items-center gap-5">
+    <div className="h-full w-1/2 flex flex-col justify-center items-center gap-5 animate-fade">
       {!isUploading && (
         <div className="h-full w-full flex flex-col justify-center items-center gap-5">
-          <Text fontSize="6xl" fontWeight="bold" color="teal" textAlign="center">
+          <Text
+            fontSize="6xl"
+            fontWeight="bold"
+            color="teal"
+            textAlign="center"
+          >
             {"Finally, let's put a face to your amazing profile"}
           </Text>
           <Text fontSize="xl" color="teal" textAlign="center">
@@ -60,7 +59,7 @@ export default function UploadPhoto() {
               type="file"
               ref={fileInputRef}
               onChange={handleUpload}
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
               accept=".jpg,.jpeg,.png"
             />
             <Button
@@ -78,7 +77,13 @@ export default function UploadPhoto() {
       {isUploading && (
         <div className="flex flex-col justify-center items-center gap-5">
           <Spinner size="xl" color="teal" />
-          <Text fontSize="5xl" fontWeight="bold" color="teal" textAlign="center">
+          <Text
+            className="animate-fadeLoop"
+            fontSize="5xl"
+            fontWeight="bold"
+            color="teal"
+            textAlign="center"
+          >
             Uploading photo
           </Text>
         </div>
