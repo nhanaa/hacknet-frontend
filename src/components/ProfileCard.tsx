@@ -1,6 +1,7 @@
-import { User } from '@/types/user.types';
-import { Box, Card, CardBody, Stack, Text } from '@chakra-ui/react';
-import Image from 'next/image';
+import { User } from "@/types/user.types";
+import { Box, Card, CardBody, Stack, Text } from "@chakra-ui/react";
+import Image from "next/image";
+import { motion, useDragControls } from "framer-motion";
 
 interface ProfileCardProps {
   user: User | undefined;
@@ -8,19 +9,12 @@ interface ProfileCardProps {
   role?: string;
 }
 
-export default function ProfileCard({
-  user,
-  color,
-  role,
-}: ProfileCardProps) {
+export default function ProfileCard({ user, color, role }: ProfileCardProps) {
+  const controls = useDragControls();
   if (!user) {
     return (
       <div className="w-80">
-        <Card
-          className={`p-2 bg-white`}
-          borderRadius="1.2rem"
-          height={'525px'}
-        >
+        <Card className={`p-2 bg-white`} borderRadius="1.2rem" height={"525px"}>
           <CardBody className="flex flex-col justify-center items-center  gap-5">
             <Stack
               className="flex flex-col justify-center items-center"
@@ -44,15 +38,12 @@ export default function ProfileCard({
   return (
     <div className="w-80">
       <Card
-        className={`p-2 bg-white ${color ? '!border-2'  : ''}`}
+        className={`p-2 bg-white ${color ? "!border-2" : ""}`}
         borderColor={color}
         borderRadius="1.2rem"
       >
         <CardBody className="gap-5">
-          <Stack
-            className="flex flex-col justify-center items-center"
-            gap={3}
-          >
+          <Stack className="flex flex-col justify-center items-center" gap={3}>
             <Image
               src={user.imageLink}
               width={200}
