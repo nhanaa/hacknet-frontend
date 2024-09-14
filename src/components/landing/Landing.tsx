@@ -9,7 +9,7 @@ export default function Landing() {
   const router = useRouter();
 
   const handleGetStarted = () => {
-    router.push("/onboarding/upload-resume");
+    router.push("/auth/signup");
   };
 
   return (

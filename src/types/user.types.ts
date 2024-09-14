@@ -12,4 +12,17 @@ export interface User {
   note: string;
   trait: string;
   discordLink: string;
-}
+  imageLink: string;
+};
+
+export interface UserAuth {
+  username: string;
+  password: string;
+};
+
+export interface UserSignup {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+};

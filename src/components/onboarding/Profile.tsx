@@ -2,25 +2,28 @@
 
 import { ArrowRightIcon } from '@chakra-ui/icons';
 import {
-  Box,
   Button,
-  Card,
-  CardBody,
-  Stack,
+  Spinner,
   Text,
 } from '@chakra-ui/react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import ProfileCard from '../ProfileCard';
-import { mockUser } from '../../mock/user.mock';
-
+import { useGetCurrentUser } from '@/hooks/user.hooks';
 
 export default function Profile() {
   const router = useRouter();
 
+  const { data: user } = useGetCurrentUser();
+
   const handleGoToDashboard = () => {
     router.push('/dashboard');
   };
+
+  if (!user) {
+    return (
+      <Spinner size="xl" color="teal" />
+    )
+  }
 
   return (
     <div className="h-full w-full flex flex-col justify-center items-center gap-5">
@@ -32,7 +35,7 @@ export default function Profile() {
       >
         {'Tada! This is your HackNet card'}
       </Text>
-      <ProfileCard user={mockUser} />
+      <ProfileCard user={user} />
       <Button
         size="lg"
         variant="outline"

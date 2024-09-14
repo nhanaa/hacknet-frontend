@@ -10,6 +10,7 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { TriangleUpIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/navigation';
+import { useUploadUserPhoto } from '@/hooks/user.hooks';
 
 export default function UploadPhoto() {
   const toast = useToast();
@@ -18,6 +19,15 @@ export default function UploadPhoto() {
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const { mutate: uploadUserPhoto, isPending } = useUploadUserPhoto({
+    onSuccess: () => {
+      router.push('/onboarding/profile');
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -38,10 +48,9 @@ export default function UploadPhoto() {
 
   useEffect(() => {
     if (file && isUploading) {
-      // TODO: Upload photo to server, if success move to next page
-      setTimeout(() => {
-        router.push('/onboarding/profile');
-      }, 5000);
+      uploadUserPhoto({
+        imageLink: '/photo1.png',
+      });
     }
   }, [file, isUploading, toast, router]);
 

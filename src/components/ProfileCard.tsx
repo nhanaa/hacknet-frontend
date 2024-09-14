@@ -52,7 +52,7 @@ export default function ProfileCard({
             gap={3}
           >
             <Image
-              src={'/photo1.png'}
+              src={user.imageLink}
               width={200}
               height={200}
               className="rounded-md"

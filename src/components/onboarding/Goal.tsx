@@ -1,14 +1,27 @@
 'use client';
 
+import { useUpdateUserGoal } from '@/hooks/user.hooks';
 import { ArrowRightIcon } from '@chakra-ui/icons';
 import { Button, Select, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
+import { ChangeEventHandler, useState } from 'react';
 
 export default function Goal() {
   const router = useRouter();
 
+  const [selectedGoal, setSelectedGoal] = useState<string>('');
+
+  const { mutate: updateUserGoal, isPending } = useUpdateUserGoal({
+    onSuccess: () => {
+      router.push('/onboarding/upload-photo');
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
+
   const handleNext = () => {
-    // TODO: Update user's goal in the database
+    updateUserGoal(selectedGoal);
     router.push('/onboarding/upload-photo');
   };
 
@@ -30,7 +43,11 @@ export default function Goal() {
       >
         What is your main goal attending a hackathon?
       </Text>
-      <Select placeholder="Select your goal" color="teal">
+      <Select
+        placeholder="Select your goal"
+        color="teal"
+        onChange={(e) => setSelectedGoal(e.target.value)}
+      >
         <option value="win hackathon">Win Hackathon</option>
         <option value="innovate solution">Innovate Solution</option>
         <option value="networking">Networking</option>
@@ -41,6 +58,7 @@ export default function Goal() {
         variant="outline"
         leftIcon={<ArrowRightIcon />}
         rightIcon={<ArrowRightIcon />}
+        disabled={!selectedGoal || isPending}
         onClick={handleNext}
       >
         Next

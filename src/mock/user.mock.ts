@@ -12,6 +12,7 @@ export const mockUser = {
   note: 'I am a very competitive person and I love to win!',
   trait: 'Competitive',
   discordLink: 'https://discord.gg/invite',
+  imageLink: '/photo1.png',
 };
 
 export const mockFrontendUsers = [
@@ -29,6 +30,7 @@ export const mockFrontendUsers = [
     note: 'optional here',
     trait: 'flexible',
     discordLink: 'discord link here',
+    imageLink: '/photo1.png',
   },
   {
     id: '81234567',
@@ -44,6 +46,7 @@ export const mockFrontendUsers = [
     note: 'optional here',
     trait: 'efficient',
     discordLink: 'discord link here',
+    imageLink: '/photo1.png',
   },
   {
     id: '81234567',
@@ -59,6 +62,7 @@ export const mockFrontendUsers = [
     note: 'optional here',
     trait: 'efficient',
     discordLink: 'discord link here',
+    imageLink: '/photo1.png',
   },
 ];
 
@@ -77,6 +81,7 @@ export const mockBackendUsers = [
     note: 'optional here',
     trait: 'efficient',
     discordLink: 'discord link here',
+    imageLink: '/photo1.png',
   },
   {
     id: '23456781',
@@ -92,6 +97,7 @@ export const mockBackendUsers = [
     note: 'optional here',
     trait: 'flexible',
     discordLink: 'discord link here',
+    imageLink: '/photo1.png',
   },
 ];
 
@@ -110,6 +116,7 @@ export const mockDataScienceUsers = [
     note: 'optional here',
     trait: 'analytical',
     discordLink: 'discord link here',
+    imageLink: '/photo1.png',
   },
   {
     id: '67812345',
@@ -125,6 +132,7 @@ export const mockDataScienceUsers = [
     note: 'optional here',
     trait: 'collaborative',
     discordLink: 'discord link here',
+    imageLink: '/photo1.png',
   },
 ];
 
@@ -143,6 +151,7 @@ export const mockBusinessUsers = [
     note: 'optional here',
     trait: 'analytical',
     discordLink: 'discord link here',
+    imageLink: '/photo1.png',
   },
   {
     id: '45678123',
@@ -158,5 +167,6 @@ export const mockBusinessUsers = [
     note: 'optional here',
     trait: 'collaborative',
     discordLink: 'discord link here',
+    imageLink: '/photo1.png',
   },
 ];

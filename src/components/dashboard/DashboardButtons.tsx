@@ -1,6 +1,7 @@
 'use client';
 
 import { Button, Stack } from '@chakra-ui/react';
+import { deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 
 export default function DashboardButtons() {
@@ -24,6 +25,17 @@ export default function DashboardButtons() {
           colorScheme="teal"
         >
           Roster Evaluator
+        </Button>
+        <Button
+          className="w-64"
+          colorScheme="teal"
+          variant="outline"
+          onClick={() => {
+            deleteCookie('accessToken');
+            router.push('/auth/login');
+          }}
+        >
+          Logout
         </Button>
       </Stack>
     </div>

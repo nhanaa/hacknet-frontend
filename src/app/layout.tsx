@@ -1,10 +1,16 @@
 import type { Metadata } from 'next';
-import './globals.css';
 import { ChakraProvider } from '@chakra-ui/react';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+import './globals.css';
+import { Providers } from './providers';
 
 export const metadata: Metadata = {
   title: 'HackNet',
-  description: 'HackNet - Connect Hackers for a better hackathon experience',
+  description:
+    'HackNet - Connect Hackers for a better hackathon experience',
 };
 
 export default function RootLayout({
@@ -12,10 +18,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <body className="bg-gray-100">
-        <ChakraProvider>{children}</ChakraProvider>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

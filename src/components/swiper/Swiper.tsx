@@ -275,7 +275,6 @@ export default function Swiper() {
                 colorScheme="blue"
                 variant="solid"
                 leftIcon={<ChatIcon />}
-                rightIcon={<ChatIcon />}
                 onClick={handleSendMessage}
               >
                 Send
