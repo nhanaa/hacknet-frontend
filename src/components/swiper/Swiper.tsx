@@ -187,6 +187,11 @@ export default function Swiper() {
   const input = [-300, 0, 300];
   const output = [0, 1, 0];
   const opacity = useTransform(x, input, output);
+  const background = useTransform(x, input, [
+    "rgba(255,255,255,.5)",
+    "rgba(255,255,255,.5);",
+    "rgba(255,255,255,.5);",
+  ]);
 
   const onDragEnd = () => {
     if (x.get() > 300) {
@@ -246,10 +251,10 @@ export default function Swiper() {
               No
             </Button>
             <motion.div
-              style={{ x, opacity }}
+              style={{ x, opacity, background }}
               drag
               onDragEnd={onDragEnd}
-              dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
+              dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }}
               whileTap={{ boxShadow: "0px 0px 15px rgba(0,0,0,0.2)" }}
               dragConstraints={{
                 top: -0,
