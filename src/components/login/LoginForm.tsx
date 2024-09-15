@@ -22,7 +22,9 @@ export default function LoginForm() {
   const { mutate: login, isPending } = useLogin({
     onSuccess: (data) => {
       // set in cookie
-      setCookie('accessToken', data.access_token);
+      setCookie('accessToken', data.access_token, {
+        maxAge: 60 * 60 * 2,
+      });
       if (data.needOnBoarding) {
         router.push('/onboarding/upload-resume');
       } else {
