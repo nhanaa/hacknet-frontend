@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { User } from '@/types/user.types';
+import { User } from "@/types/user.types";
 import {
   Box,
   Button,
@@ -14,62 +14,51 @@ import {
   Spinner,
   Stack,
   Text,
-} from '@chakra-ui/react';
-import { ChangeEvent, useEffect, useMemo, useState } from 'react';
-import ProfileCard from '../ProfileCard';
-import { ArrowLeftIcon, ChatIcon } from '@chakra-ui/icons';
-import { useRouter } from 'next/navigation';
-import {
-  useCreateMatch,
-  useGetPossibleMatches,
-} from '@/hooks/matches.hooks';
+  Icon,
+} from "@chakra-ui/react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import ProfileCard from "../ProfileCard";
+import { ArrowLeftIcon, ChatIcon } from "@chakra-ui/icons";
+import { useRouter } from "next/navigation";
+import { useCreateMatch, useGetPossibleMatches } from "@/hooks/matches.hooks";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 
 export default function Swiper() {
   const router = useRouter();
   const [frontendQueue, setFrontendQueue] = useState<User[]>([]);
   const [backendQueue, setBackendQueue] = useState<User[]>([]);
-  const [datascienceQueue, setDatascienceQueue] = useState<User[]>(
-    []
-  );
+  const [datascienceQueue, setDatascienceQueue] = useState<User[]>([]);
   const [businessQueue, setBusinessQueue] = useState<User[]>([]);
 
-  const [currentQueue, setCurrentQueue] = useState<string>(
-    'Frontend'
-  );
+  const [currentQueue, setCurrentQueue] = useState<string>("Frontend");
   const [isSearching, setIsSearching] = useState<boolean>(true);
 
-  const [hasConfirmedMatch, setHasConfirmedMatch] = useState<boolean>(
-    false
-  );
-  const [message, setMessage] = useState<string>('');
+  const [hasConfirmedMatch, setHasConfirmedMatch] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
 
-  const {
-    data: possibleMatches,
-    isLoading,
-    isError,
-  } = useGetPossibleMatches();
+  const { data: possibleMatches, isLoading, isError } = useGetPossibleMatches();
 
   const { mutate: matchUser } = useCreateMatch();
 
   const getNextUser = () => {
     {
       switch (currentQueue) {
-        case 'Frontend':
+        case "Frontend":
           if (frontendQueue.length === 0) {
             return undefined;
           }
           return frontendQueue[frontendQueue.length - 1];
-        case 'Backend':
+        case "Backend":
           if (backendQueue.length === 0) {
             return undefined;
           }
           return backendQueue[backendQueue.length - 1];
-        case 'Data Science':
+        case "Data Science":
           if (datascienceQueue.length === 0) {
             return undefined;
           }
           return datascienceQueue[datascienceQueue.length - 1];
-        case 'Business':
+        case "Business":
           if (businessQueue.length === 0) {
             return undefined;
           }
@@ -91,13 +80,13 @@ export default function Swiper() {
   ]);
 
   const cardColor = useMemo(() => {
-    return currentQueue === 'Frontend'
-      ? 'pink'
-      : currentQueue === 'Backend'
-      ? 'yellow'
-      : currentQueue === 'Data Science'
-      ? 'blue'
-      : 'cyan';
+    return currentQueue === "Frontend"
+      ? "pink"
+      : currentQueue === "Backend"
+      ? "yellow"
+      : currentQueue === "Data Science"
+      ? "blue"
+      : "cyan";
   }, [currentQueue]);
 
   useEffect(() => {
@@ -124,16 +113,16 @@ export default function Swiper() {
       {
         onSuccess: (data) => {
           switch (currentQueue) {
-            case 'Frontend':
+            case "Frontend":
               setFrontendQueue(frontendQueue.slice(0, -1));
               break;
-            case 'Backend':
+            case "Backend":
               setBackendQueue(backendQueue.slice(0, -1));
               break;
-            case 'Data Science':
+            case "Data Science":
               setDatascienceQueue(datascienceQueue.slice(0, -1));
               break;
-            case 'Business':
+            case "Business":
               setBusinessQueue(businessQueue.slice(0, -1));
               break;
             default:
@@ -156,39 +145,60 @@ export default function Swiper() {
       return;
     }
 
-    matchUser({
-      user2Id: nextUser?.userId,
-      matchType: false,
-    }, {
-      onSuccess: () => {
-        switch (currentQueue) {
-          case 'Frontend':
-            setFrontendQueue(frontendQueue.slice(0, -1));
-            break;
-          case 'Backend':
-            setBackendQueue(backendQueue.slice(0, -1));
-            break;
-          case 'Data Science':
-            setDatascienceQueue(datascienceQueue.slice(0, -1));
-            break;
-          case 'Business':
-            setBusinessQueue(businessQueue.slice(0, -1));
-            break;
-          default:
-            break;
-        }
+    matchUser(
+      {
+        user2Id: nextUser?.userId,
+        matchType: false,
       },
-      onError: (error) => {
-        console.error(error);
-      },
-    })
+      {
+        onSuccess: () => {
+          switch (currentQueue) {
+            case "Frontend":
+              setFrontendQueue(frontendQueue.slice(0, -1));
+              break;
+            case "Backend":
+              setBackendQueue(backendQueue.slice(0, -1));
+              break;
+            case "Data Science":
+              setDatascienceQueue(datascienceQueue.slice(0, -1));
+              break;
+            case "Business":
+              setBusinessQueue(businessQueue.slice(0, -1));
+              break;
+            default:
+              break;
+          }
+        },
+        onError: (error) => {
+          console.error(error);
+        },
+      }
+    );
   };
 
   const handleSendMessage = () => {
     // TODO: Send message to the other user
     console.log(message);
     setHasConfirmedMatch(false);
-    setMessage('');
+    setMessage("");
+  };
+
+  const x = useMotionValue(0);
+  const input = [-300, 0, 300];
+  const output = [0, 1, 0];
+  const opacity = useTransform(x, input, output);
+  const background = useTransform(x, input, [
+    "rgba(255,255,255,.5)",
+    "rgba(255,255,255,.5);",
+    "rgba(255,255,255,.5);",
+  ]);
+
+  const onDragEnd = () => {
+    if (x.get() > 300) {
+      handleYes();
+    } else if (x.get() < -300) {
+      handleNo();
+    }
   };
 
   return (
@@ -198,48 +208,34 @@ export default function Swiper() {
           className="flex flex-col justify-center items-center animate-fade"
           gap={3}
         >
-          <Text
-            fontSize="5xl"
-            fontWeight="medium"
-            color="teal"
-            textAlign="center"
-          >
-            Teammate Swiper
-          </Text>
           <Box className="flex flex-row gap-2">
             <Button
               colorScheme="pink"
-              variant={`${
-                currentQueue === 'Frontend' ? 'solid' : 'outline'
-              }`}
-              onClick={() => setCurrentQueue('Frontend')}
+              variant={`${currentQueue === "Frontend" ? "solid" : "outline"}`}
+              onClick={() => setCurrentQueue("Frontend")}
             >
               Front-end
             </Button>
             <Button
               colorScheme="yellow"
-              variant={`${
-                currentQueue === 'Backend' ? 'solid' : 'outline'
-              }`}
-              onClick={() => setCurrentQueue('Backend')}
+              variant={`${currentQueue === "Backend" ? "solid" : "outline"}`}
+              onClick={() => setCurrentQueue("Backend")}
             >
               Back-end
             </Button>
             <Button
               colorScheme="blue"
               variant={`${
-                currentQueue === 'Data Science' ? 'solid' : 'outline'
+                currentQueue === "Data Science" ? "solid" : "outline"
               }`}
-              onClick={() => setCurrentQueue('Data Science')}
+              onClick={() => setCurrentQueue("Data Science")}
             >
               Data Science
             </Button>
             <Button
               colorScheme="cyan"
-              variant={`${
-                currentQueue === 'Business' ? 'solid' : 'outline'
-              }`}
-              onClick={() => setCurrentQueue('Business')}
+              variant={`${currentQueue === "Business" ? "solid" : "outline"}`}
+              onClick={() => setCurrentQueue("Business")}
             >
               Business
             </Button>
@@ -254,11 +250,25 @@ export default function Swiper() {
             >
               No
             </Button>
-            <ProfileCard
-              user={nextUser}
-              color={cardColor}
-              role={currentQueue.toLowerCase()}
-            />
+            <motion.div
+              style={{ x, opacity, background }}
+              drag
+              onDragEnd={onDragEnd}
+              dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }}
+              whileTap={{ boxShadow: "0px 0px 15px rgba(0,0,0,0.2)" }}
+              dragConstraints={{
+                top: -0,
+                left: -0,
+                right: 0,
+                bottom: 0,
+              }}
+            >
+              <ProfileCard
+                user={nextUser}
+                color={cardColor}
+                role={currentQueue.toLowerCase()}
+              />
+            </motion.div>
             <Button
               className="w-20"
               colorScheme="green"
@@ -276,7 +286,7 @@ export default function Swiper() {
             borderRadius="1.2rem"
             leftIcon={<ArrowLeftIcon />}
             rightIcon={<ArrowLeftIcon />}
-            onClick={() => router.push('/dashboard')}
+            onClick={() => router.push("/dashboard")}
           >
             Back to Dashboard
           </Button>
@@ -302,8 +312,8 @@ export default function Swiper() {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{"You\'ve got a match!"}</ModalHeader>
-          <ModalBody>{"Let them know you\'re interested!"}</ModalBody>
+          <ModalHeader>{"You've got a match!"}</ModalHeader>
+          <ModalBody>{"Let them know you're interested!"}</ModalBody>
           <ModalFooter>
             <Box className="w-full flex flex-row justify-between items-center gap-3">
               <Input

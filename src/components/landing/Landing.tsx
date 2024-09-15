@@ -6,6 +6,7 @@ import Image from "next/image";
 import logo from "../../../public/logo.svg";
 import { useState } from "react";
 import { getCookie } from "cookies-next";
+import ConfettiExplosion from "react-confetti-explosion";
 
 export default function Landing() {
   const router = useRouter();
