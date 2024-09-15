@@ -1,26 +1,26 @@
-import { User } from '@/types/user.types';
+import { User } from "@/types/user.types";
 import {
   useMutation,
   UseMutationOptions,
   useQuery,
-} from '@tanstack/react-query';
-import { getCookie } from 'cookies-next';
+} from "@tanstack/react-query";
+import { getCookie } from "cookies-next";
 
 export const useGetCurrentUser = () =>
   useQuery({
-    queryKey: ['getCurrentUser'],
+    queryKey: ["getCurrentUser"],
     queryFn: async () => {
       const response = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + '/userinfo',
+        process.env.NEXT_PUBLIC_API_URL + "/userinfo",
         {
           headers: {
-            Authorization: `Bearer ${getCookie('accessToken')}`,
+            Authorization: `Bearer ${getCookie("accessToken")}`,
           },
         }
       );
 
       if (response.status === 404) {
-        throw new Error('User has not completed onboarding');
+        throw new Error("User has not completed onboarding");
       }
 
       return response.json() as Promise<User>;
@@ -31,17 +31,17 @@ export const useUploadUserResume = (
   options: UseMutationOptions<User, Error, File>
 ) =>
   useMutation({
-    mutationKey: ['uploadUserResume'],
+    mutationKey: ["uploadUserResume"],
     mutationFn: async (file: File) => {
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append("file", file);
       const response = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + '/userinfo/uploadfile',
+        process.env.NEXT_PUBLIC_API_URL + "/userinfo/uploadfile",
         {
-          method: 'POST',
+          method: "POST",
           body: formData,
           headers: {
-            Authorization: `Bearer ${getCookie('accessToken')}`,
+            Authorization: `Bearer ${getCookie("accessToken")}`,
           },
         }
       );
@@ -54,17 +54,17 @@ export const useUploadUserPhoto = (
   options: UseMutationOptions<{ message: string }, Error, File>
 ) =>
   useMutation({
-    mutationKey: ['uploadUserPhoto'],
+    mutationKey: ["uploadUserPhoto"],
     mutationFn: async (file: File) => {
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append("file", file);
       const response = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + '/userinfo/uploadphoto',
+        process.env.NEXT_PUBLIC_API_URL + "/userinfo/uploadphoto",
         {
-          method: 'POST',
+          method: "POST",
           body: formData,
           headers: {
-            Authorization: `Bearer ${getCookie('accessToken')}`,
+            Authorization: `Bearer ${getCookie("accessToken")}`,
           },
         }
       );
@@ -77,16 +77,38 @@ export const useUpdateUserGoal = (
   options: UseMutationOptions<{ message: string }, Error, string>
 ) =>
   useMutation({
-    mutationKey: ['updateUserGoal'],
+    mutationKey: ["updateUserGoal"],
     mutationFn: async (goal: string) => {
       const response = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + '/userinfo/goal',
+        process.env.NEXT_PUBLIC_API_URL + "/userinfo/goal",
         {
-          method: 'PUT',
+          method: "PUT",
           body: JSON.stringify({ goal }),
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${getCookie('accessToken')}`,
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getCookie("accessToken")}`,
+          },
+        }
+      );
+      return response.json();
+    },
+    ...options,
+  });
+
+export const useUpdateUserPronouns = (
+  options: UseMutationOptions<{ message: string }, Error, string>
+) =>
+  useMutation({
+    mutationKey: ["updateUserPronouns"],
+    mutationFn: async (pronouns: string) => {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_API_URL + "/userinfo/pronouns",
+        {
+          method: "PUT",
+          body: JSON.stringify({ pronouns }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getCookie("accessToken")}`,
           },
         }
       );

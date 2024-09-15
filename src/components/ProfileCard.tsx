@@ -134,13 +134,33 @@ export default function ProfileCard({ user, color, role }: ProfileCardProps) {
                 </Text>
               ))}
             </Box>
+            <Box className="flex flex-row justify-center items-center gap-2">
+              <Text
+                fontSize="lg"
+                fontWeight="600"
+                color="teal"
+                textAlign="center"
+              >
+                Main Goal
+              </Text>
+              <Text
+                className="rounded-md flex justify-center items-center p-1"
+                fontSize="medium"
+                fontWeight="bold"
+                color="white"
+                textAlign="center"
+                background="teal"
+              >
+                {user.goal}
+              </Text>
+            </Box>
             <Text
               fontSize="lg"
               fontWeight="600"
               color="teal"
               textAlign="center"
             >
-              Main Goal
+              Pronouns
             </Text>
             <Text
               className="rounded-md flex justify-center items-center p-1"
@@ -150,7 +170,7 @@ export default function ProfileCard({ user, color, role }: ProfileCardProps) {
               textAlign="center"
               background="teal"
             >
-              {user.goal}
+              {user.pronouns}
             </Text>
           </Stack>
         </CardBody>

@@ -15,19 +15,15 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  if (!accessToken) {
-    return NextResponse.redirect(`${origin}/auth/login`);
-  }
-
   return NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    '/auth/:path*',
-    '/dashboard/:path*',
-    '/onboarding/:path*',
-    '/swipe/:path*',
-    '/evaluate/:path*',
+    "/auth/:path*",
+    "/dashboard/:path*",
+    "/onboarding/:path*",
+    "/swipe/:path*",
+    "/evaluate/:path*",
   ],
 };
