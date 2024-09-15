@@ -50,9 +50,7 @@ export default function UploadPhoto() {
 
   useEffect(() => {
     if (file && isUploading) {
-      uploadUserPhoto({
-        imageLink: '/photo1.png',
-      });
+      uploadUserPhoto(file);
     }
   }, [file, isUploading, toast, router]);
 
