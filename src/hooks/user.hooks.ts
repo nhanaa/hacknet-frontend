@@ -51,26 +51,21 @@ export const useUploadUserResume = (
   });
 
 export const useUploadUserPhoto = (
-  options: UseMutationOptions<
-    { message: string },
-    Error,
-    {
-      imageLink: string;
-    }
-  >
+  options: UseMutationOptions<{ message: string }, Error, File>
 ) =>
   useMutation({
     mutationKey: ['uploadUserPhoto'],
-    mutationFn: async ({ imageLink }: { imageLink: string }) => {
+    mutationFn: async (file: File) => {
+      const formData = new FormData();
+      formData.append('file', file);
       const response = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + '/userinfo/imagelink',
+        process.env.NEXT_PUBLIC_API_URL + '/userinfo/uploadphoto',
         {
-          method: 'PUT',
+          method: 'POST',
+          body: formData,
           headers: {
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${getCookie('accessToken')}`,
           },
-          body: JSON.stringify({ imageLink }),
         }
       );
       return response.json();
