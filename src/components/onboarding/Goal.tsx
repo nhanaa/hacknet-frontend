@@ -46,7 +46,7 @@ export default function Goal() {
         onChange={(e) => setSelectedGoal(e.target.value)}
       >
         <option value="Win Hackathon">Win Hackathon</option>
-        <option value="Innovate Solution">Innovate Solution</option>
+        <option value="Have Fun">Have Fun</option>
         <option value="Networking">Networking</option>
         <option value="Gain Experience">Gain Experience</option>
       </Select>
