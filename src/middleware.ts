@@ -7,12 +7,16 @@ export async function middleware(request: NextRequest) {
   const url = new URL(request.url);
   const origin = url.origin;
 
-  if (!accessToken) {
-    return NextResponse.redirect(`${origin}/auth/login`);
-  }
-
   if (url.pathname.startsWith("/auth") && accessToken) {
     return NextResponse.redirect(`${origin}/dashboard`);
+  }
+
+  if (url.pathname.startsWith("/dashboard") && !accessToken) {
+    return NextResponse.next();
+  }
+
+  if (!accessToken) {
+    return NextResponse.redirect(`${origin}/auth/login`);
   }
 
   return NextResponse.next();
@@ -20,8 +24,10 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/dashboard:path*",
-    "/onboarding:path*",
-    "/swipe:path*",
+    '/auth/:path*',
+    '/dashboard/:path*',
+    '/onboarding/:path*',
+    '/swipe/:path*',
+    '/evaluate/:path*',
   ],
 };

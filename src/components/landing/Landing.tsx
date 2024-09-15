@@ -35,7 +35,7 @@ export default function Landing() {
         } h-full w-full flex flex-col justify-center items-center gap-5 animate-fade`}
       >
         <Image src={logo} alt="Logo" />
-        <Text fontSize="6xl" fontWeight="bold" color="teal">
+        <Text fontSize="6xl" fontWeight="bold" color="teal" textAlign="center">
           Welcome to HackNet
         </Text>
         <Button

@@ -48,7 +48,7 @@ export default function Goal() {
         color="teal"
         textAlign="center"
       >
-        What is your main goal attending a hackathon?
+        What is your main goal while attending a hackathon?
       </Text>
       <Select
         placeholder="Select your goal"

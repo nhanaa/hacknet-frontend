@@ -14,7 +14,7 @@ export default function ProfileCard({ user, color, role }: ProfileCardProps) {
   if (!user) {
     return (
       <div className="w-80">
-        <Card className={`p-2 bg-white`} borderRadius="1.2rem" height={"525px"}>
+        <Card className={`p-2 bg-white`} borderRadius="1.2rem" height={"510px"}>
           <CardBody className="flex flex-col justify-center items-center  gap-5">
             <Stack
               className="flex flex-col justify-center items-center"
@@ -44,13 +44,15 @@ export default function ProfileCard({ user, color, role }: ProfileCardProps) {
       >
         <CardBody className="gap-5">
           <Stack className="flex flex-col justify-center items-center" gap={3}>
-            <Image
-              src={user.imageLink}
-              width={200}
-              height={200}
-              className="rounded-md"
-              alt="Profile photo"
-            />
+            <div className="h-32 flex flex-row justify-center items-center">
+              <Image
+                src={user.imageLink}
+                width={200}
+                height={200}
+                className="rounded-md"
+                alt="Profile photo"
+              />
+            </div>
             <Text
               className="w-full rounded-xl flex justify-center items-center"
               fontSize="2xl"
@@ -141,7 +143,7 @@ export default function ProfileCard({ user, color, role }: ProfileCardProps) {
               Main Goal
             </Text>
             <Text
-              className="w-32 rounded-md flex justify-center items-center p-1"
+              className="rounded-md flex justify-center items-center p-1"
               fontSize="medium"
               fontWeight="bold"
               color="white"

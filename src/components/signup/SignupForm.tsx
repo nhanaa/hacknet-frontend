@@ -60,7 +60,7 @@ export default function SignupForm() {
           color="teal"
           textAlign="center"
         >
-          Signup
+          Sign up
         </Text>
         <Input
           placeholder="First Name"
@@ -96,7 +96,7 @@ export default function SignupForm() {
           colorScheme="teal"
           isDisabled={isPending}
         >
-          Signup
+          Sign up
         </Button>
       </div>
     </form>

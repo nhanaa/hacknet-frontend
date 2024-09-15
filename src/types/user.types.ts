@@ -13,6 +13,7 @@ export interface User {
   trait: string;
   discordLink: string;
   imageLink: string;
+  pronouns: string;
 };
 
 export interface UserAuth {

@@ -49,7 +49,11 @@ export default function DashboardButtons() {
             Your Inbox
           </Button>
         </div>
-        <Button className="w-64" colorScheme="teal">
+        <Button
+          className="w-64"
+          colorScheme="teal"
+          onClick={() => router.push('evaluate')}
+        >
           Roster Evaluator
         </Button>
         <Button
