@@ -11,7 +11,8 @@ export default function Pronouns() {
   const [leave, setLeave] = useState(false);
 
   const [pronouns, setPronouns] = useState<string>("");
-  const handleChange = (event) => setPronouns(event.target.value);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setPronouns(event.target.value);
 
   const { mutate: updateUserPronouns, isPending } = useUpdateUserPronouns({
     onSuccess: () => {
