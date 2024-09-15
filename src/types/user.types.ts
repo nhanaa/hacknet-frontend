@@ -14,16 +14,16 @@ export interface User {
   discordLink: string;
   imageLink: string;
   pronouns: string;
-};
+}
 
 export interface UserAuth {
   username: string;
   password: string;
-};
+}
 
 export interface UserSignup {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
-};
+}

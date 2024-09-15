@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { Button, Circle, Stack } from '@chakra-ui/react';
-import { deleteCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { Button, Circle, Stack } from "@chakra-ui/react";
+import { deleteCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function DashboardButtons() {
   const router = useRouter();
@@ -11,27 +11,20 @@ export default function DashboardButtons() {
   const teamSwiperClick = () => {
     // setLeave(true);
     setTimeout(() => {
-      router.push('/swiper');
+      router.push("/swiper");
     }, 700);
   };
   return (
     <div
       className={`${
-        leave && 'animate-fadeOut'
+        leave && "animate-fadeOut"
       } h-full w-full flex justify-center items-center pr-32 animate-fade`}
     >
-      <Stack
-        className="flex flex-col justify-center items-center"
-        gap={10}
-      >
-        <Button
-          className="w-64"
-          colorScheme="teal"
-          onClick={teamSwiperClick}
-        >
-          Teammate Swiper
+      <Stack className="flex flex-col justify-center items-center" gap={10}>
+        <Button className="w-64" colorScheme="teal" onClick={teamSwiperClick}>
+          Find Teammates
         </Button>
-        <div className="relative">
+        {/* <div className="relative">
           <Circle
             className="hover:animate-bounce hover:cursor-pointer"
             size="2rem"
@@ -48,21 +41,21 @@ export default function DashboardButtons() {
           <Button className="w-64" colorScheme="teal">
             Your Inbox
           </Button>
-        </div>
+        </div> */}
         <Button
           className="w-64"
           colorScheme="teal"
-          onClick={() => router.push('evaluate')}
+          onClick={() => router.push("evaluate")}
         >
-          Roster Evaluator
+          Team Evaluator
         </Button>
         <Button
           className="w-64"
           colorScheme="teal"
           variant="outline"
           onClick={() => {
-            deleteCookie('accessToken');
-            router.push('/auth/login');
+            deleteCookie("accessToken");
+            router.push("/auth/login");
           }}
         >
           Logout

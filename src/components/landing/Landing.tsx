@@ -6,7 +6,6 @@ import Image from "next/image";
 import logo from "../../../public/logo.svg";
 import { useState } from "react";
 import { getCookie } from "cookies-next";
-import ConfettiExplosion from "react-confetti-explosion";
 
 export default function Landing() {
   const router = useRouter();
@@ -16,8 +15,10 @@ export default function Landing() {
     setLeave(true);
     setTimeout(() => {
       if (getCookie("accessToken")) {
+        console.log("Cookie Present");
         router.push("/dashboard");
       } else {
+        console.log("No Cookie");
         router.push("/auth/signup");
       }
     }, 600);
